@@ -1,4 +1,8 @@
 # SOC Alert Triage Dashboard
+<img width="1912" height="1100" alt="Bildschirmfoto 2026-11-16 um 16 34 27" src="https://github.com/user-attachments/assets/a84cd7dc-59f5-4350-984e-8bd0f1954efb" />
+
+
+
 
 REST-API und Web-Oberfläche, mit der SOC-Analysten Security-Alerts einspielen, automatisch anreichern
 (Severity-Score, MITRE-ATT&CK-Mapping), filtern, priorisieren und bearbeiten.
