@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOC Alert Triage Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <section id="login-view" class="center hidden">
+    <form id="login-form" class="card">
+      <h1>SOC Triage</h1>
+      <label>Benutzername <input id="username" autocomplete="username" required></label>
+      <label>Passwort <input id="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Anmelden</button>
+      <p id="login-error" class="error"></p>
+    </form>
+  </section>
+
+  <div id="app-view" class="hidden">
+    <header>
+      <strong>SOC Triage</strong>
+      <nav>
+        <button data-tab="dashboard" class="tab active">Dashboard</button>
+        <button data-tab="alerts" class="tab">Alerts</button>
+        <button data-tab="rules" class="tab">Regeln</button>
+      </nav>
+      <span id="whoami"></span>
+      <button id="logout" class="secondary">Abmelden</button>
+    </header>
+
+    <main>
+      <section id="tab-dashboard">
+        <div class="grid" id="kpis"></div>
+        <div class="grid two">
+          <div class="card"><h2>Alerts pro Tag</h2><div id="chart-days" class="bars"></div></div>
+          <div class="card"><h2>Nach Severity</h2><div id="chart-sev" class="bars"></div></div>
+          <div class="card"><h2>Top Quell-IPs</h2><ul id="top-ips"></ul></div>
+          <div class="card"><h2>Top MITRE-Techniken</h2><ul id="top-mitre"></ul></div>
+        </div>
+      </section>
+
+      <section id="tab-alerts" class="hidden">
+        <div class="filters">
+          <input id="f-q" placeholder="Suche (Signatur, IP)">
+          <select id="f-sev"><option value="">Severity: alle</option>
+            <option>low</option><option>medium</option><option>high</option><option>critical</option></select>
+          <select id="f-status"><option value="">Status: alle</option>
+            <option>new</option><option>investigating</option><option>closed</option><option>false_positive</option></select>
+          <select id="f-sort">
+            <option value="timestamp">Sortierung: Zeit</option>
+            <option value="score">Sortierung: Score</option>
+          </select>
+          <button id="f-apply">Filtern</button>
+          <button id="new-alert" class="secondary">+ Alert</button>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Zeit</th><th>Quelle</th><th>Signatur</th><th>Severity</th><th>Score</th><th>Status</th></tr></thead>
+          <tbody id="alert-rows"></tbody>
+        </table>
+        <div class="pager">
+          <button id="prev" class="secondary">Zurück</button>
+          <span id="page-info"></span>
+          <button id="next" class="secondary">Weiter</button>
+        </div>
+      </section>
+
+      <section id="tab-rules" class="hidden">
+        <table>
+          <thead><tr><th>Stichwort</th><th>MITRE</th><th>Technik</th><th>Basis-Score</th></tr></thead>
+          <tbody id="rule-rows"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="detail">
+    <div id="detail-body"></div>
+    <button id="detail-close" class="secondary">Schließen</button>
+  </dialog>
+
+  <dialog id="create">
+    <form id="create-form">
+      <h2>Neuen Alert einspielen</h2>
+      <label>Quell-IP <input name="source_ip" required></label>
+      <label>Ziel-IP <input name="dest_ip"></label>
+      <label>Signatur <input name="signature" required minlength="3"></label>
+      <label>Severity
+        <select name="severity"><option>low</option><option selected>medium</option><option>high</option><option>critical</option></select>
+      </label>
+      <button type="submit">Speichern</button>
+      <button type="button" id="create-close" class="secondary">Abbrechen</button>
+      <p id="create-error" class="error"></p>
+    </form>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
