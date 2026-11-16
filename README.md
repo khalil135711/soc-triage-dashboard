@@ -1,5 +1,6 @@
 # SOC Alert Triage Dashboard
 <img width="1912" height="1100" alt="Bildschirmfoto 2026-11-16 um 16 34 27" src="https://github.com/user-attachments/assets/a84cd7dc-59f5-4350-984e-8bd0f1954efb" />
+<img width="1912" height="648" alt="Bildschirmfoto 2026-11-16 um 16 35 27" src="https://github.com/user-attachments/assets/5152f7ac-057a-46b3-8e91-ea59c54d8fa0" />
 
 
 
